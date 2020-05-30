@@ -7,4 +7,5 @@
     <h2>{{ title }}</h2>
     {{ wtf.quick_form(form) }}
     <p style="margin-top: 1rem">New User? <a href="{{ url_for('auth.register') }}">Click here to register</a></p>
+    <p style="margin-top: 1rem">Forget Password? <a href="{{ url_for('auth.reset_password_request') }}">Click here to reset password</a></p>
 {% endblock %}

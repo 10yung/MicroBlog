@@ -1,0 +1,13 @@
+<h1>Dear {{ user }},</h1>
+
+<p>Welcome to MicroBlog!</p>
+
+<p>To confirm your account please click on the following link:</p>
+
+<p>{{ url_for('auth.confirm', token=token, _external=True) }}</p>
+
+<p>Sincerely,</p>
+
+<p>The MicroBlog Team</p>
+
+<p>Note: replies to this email address are not monitored.</p>
