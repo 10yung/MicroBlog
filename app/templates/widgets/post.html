@@ -1,0 +1,10 @@
+<div class="panel panel-info">
+    {% if profile_page %}
+        <div class="panel-heading">ID: {{ post.id }} <span class="pull-right">{{ post.timestamp | pretty_date }}</span></div>
+    {% else %}
+        <div class="panel-heading">{{ post.author.user_name }}<span class="pull-right">Date: {{ post.timestamp | pretty_date }}</span></div>
+    {% endif %}
+    <div class="panel-body">
+        {{ post.body }}
+    </div>
+</div>

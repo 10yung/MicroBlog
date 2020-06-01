@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField
 from wtforms.validators import DataRequired, Email, ValidationError, EqualTo, Regexp
 
 from app.models.User import User
@@ -18,6 +18,7 @@ class RegistrationForm(FlaskForm):
                                                    Regexp('^[A-Za-z][A-Za-z0-9_.]*$', 0,
                                                           'User name must have only letters, numbers, dots or '
                                                           'underscores')])
+    about_me = TextAreaField('About Me', render_kw={"rows": 3}, validators=[DataRequired()])
     password = PasswordField('Password', validators=[DataRequired()])
     confirm_password = PasswordField('Confirm Password',
                                      validators=[DataRequired(), EqualTo('password',
@@ -45,4 +46,9 @@ class ResetPasswordForm(FlaskForm):
     confirm_password = PasswordField('Confirm Password',
                                      validators=[DataRequired(), EqualTo('password',
                                                                          message='Passwords must match.')])
+    submit = SubmitField('Submit')
+
+
+class PostForm(FlaskForm):
+    body = TextAreaField("What's on your mind?", render_kw={"rows": 3}, validators=[DataRequired()])
     submit = SubmitField('Submit')

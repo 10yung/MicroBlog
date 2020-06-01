@@ -2,6 +2,7 @@ from app import db, login_manager
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from flask import current_app
+from datetime import datetime
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 
 
@@ -15,10 +16,12 @@ class User(UserMixin, db.Model):
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
     user_name = db.Column(db.String(32), index=True, unique=True)
+    about_me = db.Column(db.Text())
+    member_since = db.Column(db.DateTime(), default=datetime.utcnow)
     email = db.Column(db.String(120), index=True, unique=True)
     password_hash = db.Column(db.String(128))
-    posts = db.relationship('Post', backref='author', lazy='dynamic')
     confirmed = db.Column(db.Boolean, default=False)
+    posts = db.relationship('Post', backref='author', lazy='dynamic')
 
     def __repr__(self):
         return self.user_name

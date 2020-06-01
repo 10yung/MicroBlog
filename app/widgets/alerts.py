@@ -34,5 +34,9 @@ alerts = {
     'reset_password_request_error': {
         'type': 'alert-danger',
         'content': 'User not found!'
+    },
+    'post_success': {
+        'type': 'alert-success',
+        'content': 'Post submitted successfully!'
     }
 }

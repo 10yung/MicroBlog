@@ -1,23 +1,22 @@
 {% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
 
-{% block title %}MicroBlog - Profile{% endblock %}
+{% block title %}MicroBlog - {{ user.user_name }}{% endblock %}
 
 {% block page_content %}
-    <h1>{{ name }}'s previous post</h1>
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h3 class="panel-title">Panel title</h3>
-        </div>
-        <div class="panel-body">
-            Panel content
-        </div>
+    <div class="jumbotron">
+        <h2>{{ user.user_name }}</h2>
+        <p>{{ user.about_me }}</p>
+        <p>Member since {{ user.member_since }}</p>
+
+        {{ wtf.quick_form(form) }}
+
+        <h2>Posts</h2>
+
+        {% for post in posts %}
+            {% include 'widgets/post.html' %}
+        {% endfor %}
     </div>
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h3 class="panel-title">Panel title</h3>
-        </div>
-        <div class="panel-body">
-            Panel content
-        </div>
-    </div>
+
+
 {% endblock %}

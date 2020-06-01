@@ -4,7 +4,7 @@ from flask_login import login_user, logout_user, current_user, login_required
 from app import db
 from app.models.User import User
 from app.widgets.alerts import alerts
-from app.auth.forms import LoginForm, RegistrationForm, ResetPasswordForm, ResetPasswordRequestForm
+from app.microblog.forms import LoginForm, RegistrationForm, ResetPasswordForm, ResetPasswordRequestForm
 from app.email import send_email
 
 auth = Blueprint('auth', __name__)
@@ -32,7 +32,7 @@ def login():
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
         # If user record exist and password is correct
-        # TODO: secure query string malicious injection, redirect to main page if un-wanted url is submitted
+        # TODO: secure query string malicious injection, redirect to microblog page if un-wanted url is submitted
         if user is None or not user.check_password(form.password.data):
             flash(alerts['login_error'])
             return redirect(url_for('auth.login'))
@@ -62,7 +62,7 @@ def register():
 
     # Action after received form data
     if form.validate_on_submit():
-        user = User(user_name=form.username.data, email=form.email.data)
+        user = User(user_name=form.username.data, email=form.email.data, about_me=form.about_me.data)
         user.set_password(form.password.data)
         db.session.add(user)
         db.session.commit()

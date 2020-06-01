@@ -3,7 +3,7 @@
 {% block title %}MicroBlog{% endblock %}
 
 {% block page_content %}
-<div class="page-header">
-    <h1>Hello, world! </h1>
-</div>
+    {% for post in posts %}
+        {% include 'widgets/post.html' %}
+    {% endfor %}
 {% endblock %}

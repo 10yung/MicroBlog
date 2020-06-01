@@ -30,10 +30,12 @@ def create_app(config_name):
 
 
     # Load config and initialize flask app
-    # import main routes to context
+    # import microblog routes to context
     from .routes.main import main as main_routes_blueprint
     from .routes.auth import auth as auth_routes_blueprint
+    from .utils.filters import filters as my_filters
     app.register_blueprint(main_routes_blueprint)
     app.register_blueprint(auth_routes_blueprint)
+    app.register_blueprint(my_filters)
 
     return app
